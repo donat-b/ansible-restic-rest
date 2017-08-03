@@ -1,0 +1,11 @@
+[Unit]
+Description=Restic REST Server ({{ item.listen }})
+After=syslog.target network.target
+StopWhenUnneeded=yes
+
+[Service]
+ExecStart=/usr/local/bin/rest-server --path "{{ item.path }}" --listen "{{ item.listen }}"
+Restart=on-failure
+
+[Install]
+WantedBy=rest-server.target

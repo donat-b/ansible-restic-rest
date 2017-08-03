@@ -1,0 +1,26 @@
+---
+
+ansible:
+  playbook:
+    - tests/test.yml
+
+driver:
+  name: vagrant
+
+verifier:
+  name: testinfra
+
+vagrant:
+  platforms:
+    - name: ubuntu-xenial64
+      box: ubuntu/xenial64
+  providers:
+    - name: virtualbox
+      type: virtualbox
+      options:
+        memory: 512
+        cpus: 2
+  instances:
+    - name: restic
+      ansible_groups:
+        - all
