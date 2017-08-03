@@ -55,6 +55,6 @@
 
 - name: Ensure service started
   systemd:
-    state: restarted
+    state: started
     daemon_reload: yes
     name: 'rest-server.target'
