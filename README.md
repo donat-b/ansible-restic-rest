@@ -1,7 +1,14 @@
 Restic rest-server
 =========
 
-Deploy rest-server for restic 
+Deploy rest-server for restic.
+The intended scheme is that rest-server instances are behind an edge proxy.
+
+Usage
+-----
+
+Define `restic_repos` variable.
+Start all servers via `systemctl start rest-server.target`
 
 Requirements
 ------------
@@ -18,7 +25,6 @@ restic_repos:
     listen: ':8000'
 ```
 
-To be added
 
 License
 -------
