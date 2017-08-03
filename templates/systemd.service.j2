@@ -6,6 +6,8 @@ StopWhenUnneeded=yes
 [Service]
 ExecStart=/usr/local/bin/rest-server --path "{{ item.path }}" --listen "{{ item.listen }}"
 Restart=on-failure
+StandardOutput=journal
+StandardError=journal
 
 [Install]
 WantedBy=rest-server.target
