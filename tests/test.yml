@@ -10,7 +10,7 @@
 - hosts: all
   remote_user: root
   vars:
-    restic_repos:
+    restic_rest_repos:
       - path: '/tmp/backup_0'
         listen: ':8000'
       - path: '/tmp/backup_1'

@@ -2,13 +2,11 @@ Restic rest-server
 =========
 
 Deploy rest-server for restic.
-The intended scheme is that rest-server instances are behind an edge proxy.
+The intended usage pattern is that rest-server instances are behind an edge proxy,
+which would handle authorization and SSL itself, if necessary.
 
-Usage
------
 
-Define `restic_repos` variable.
-Start all servers via `systemctl start rest-server.target`
+All servers can be started via `systemctl start rest-server.target`
 
 Requirements
 ------------
@@ -20,9 +18,11 @@ Role Variables
 
 ```yaml
 restic_rest_v: '0.9.4'
-restic_repos:
+restic_rest_repos:
   - path: '/user/home/backup'
     listen: ':8000'
+  - path: '/user/home/backup_something_else'
+    listen: ':8001'
 ```
 
 

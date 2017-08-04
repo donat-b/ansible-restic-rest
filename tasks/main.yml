@@ -11,19 +11,6 @@
     _platform_suffix: 'linux-386'
   when: ansible_userspace_bits == '32'
 
-- name: Set os dependent variables
-  include_vars: "{{ item }}"
-  with_first_found:
-    - files:
-      - '{{ ansible_distribution|lower }}-{{ ansible_distribution_version }}.yml'
-      - '{{ ansible_distribution|lower }}-{{ ansible_distribution_release }}.yml'
-      - '{{ ansible_distribution|lower }}-{{ ansible_distribution_major_version }}.yml'
-      - '{{ ansible_distribution|lower }}.yml'
-      - '{{ ansible_os_family|lower }}.yml'
-      paths:
-        - '../vars'
-      skip: true
-
 - name: Download client binary
   get_url:
     url: '{{ restic_rest_url }}'
@@ -46,7 +33,7 @@
   template:
     src: systemd.service.j2
     dest: "/etc/systemd/system/rest-server-{{ item.path | hash('sha1') | truncate(6, True, '') }}.service"
-  with_items: '{{ restic_repos }}'
+  with_items: '{{ restic_rest_repos }}'
 
 - name: Deploy systemd target
   template:

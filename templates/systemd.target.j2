@@ -1,6 +1,6 @@
 [Unit]
 Description=Restic REST Server
 After=syslog.target network.target
-{% for repo in restic_repos %}
+{% for repo in restic_rest_repos %}
 BindsTo=rest-server-{{ repo.path | hash('sha1') | truncate(6, True, '') }}.service
 {% endfor %}
