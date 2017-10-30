@@ -1,0 +1,29 @@
+---
+
+- name: set internal variable platform-suffix
+  set_fact:
+    _platform_suffix: 'linux-amd64'
+  when: ansible_userspace_bits == '64'
+
+- name: set internal variable platform-suffix
+  set_fact:
+    _platform_suffix: 'linux-386'
+  when: ansible_userspace_bits == '32'
+
+- name: Download client binary
+  get_url:
+    url: '{{ restic_rest_url }}'
+    dest: '/tmp/'
+  register: get_url_restic
+
+- name: Decompress the binary
+  shell: "gzip -dc {{ get_url_restic.dest }} > {{ restic_install_path }}/{{ restic_rest_binary }}"
+  args:
+    creates: '{{ restic_install_path }}/{{ restic_rest_binary }}'
+
+- name: Ensure binary permissions are correct
+  file:
+    path: '{{ restic_install_path }}/{{ restic_rest_binary }}'
+    mode: '0755'
+    owner: 'root'
+    group: 'root'

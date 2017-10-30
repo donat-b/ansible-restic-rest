@@ -1,48 +1,9 @@
 ---
-# vi: set ft=ansible :
 
-- name: set internal variable platform-suffix
-  set_fact:
-    _platform_suffix: 'linux-amd64'
-  when: ansible_userspace_bits == '64'
+- name: Install restic-rest
+  include_tasks: install.yml
+  tags: install
 
-- name: set internal variable platform-suffix
-  set_fact:
-    _platform_suffix: 'linux-386'
-  when: ansible_userspace_bits == '32'
-
-- name: Download client binary
-  get_url:
-    url: '{{ restic_rest_url }}'
-    dest: '/tmp/'
-  register: get_url_restic
-
-- name: Decompress the binary
-  shell: "gzip -dc {{ get_url_restic.dest }} > {{ restic_install_path }}/{{ restic_rest_binary }}"
-  args:
-    creates: '{{ restic_install_path }}/{{ restic_rest_binary }}'
-
-- name: Ensure binary permissions are correct
-  file:
-    path: '{{ restic_install_path }}/{{ restic_rest_binary }}'
-    mode: '0755'
-    owner: 'root'
-    group: 'root'
-
-- name: Deploy systemd service units
-  template:
-    src: systemd.service.j2
-    dest: "/etc/systemd/system/rest-server-{{ item.path | hash('sha1') | truncate(6, True, '') }}.service"
-  with_items: '{{ restic_rest_repos }}'
-  notify: rest-server restart
-
-- name: Deploy systemd target
-  template:
-    src: systemd.target.j2
-    dest: "/etc/systemd/system/rest-server.target"
-
-- name: Ensure service started
-  systemd:
-    state: started
-    daemon_reload: yes
-    name: 'rest-server.target'
+- name: Configure systemd services
+  include_tasks: configure_systemd.yml
+  tags: systemd

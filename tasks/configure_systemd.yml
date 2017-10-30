@@ -1,0 +1,19 @@
+---
+
+- name: Deploy systemd service units
+  template:
+    src: systemd.service.j2
+    dest: "/etc/systemd/system/rest-server-{{ item.path | hash('sha1') | truncate(6, True, '') }}.service"
+  with_items: '{{ restic_rest_repos }}'
+  notify: rest-server restart
+
+- name: Deploy systemd target
+  template:
+    src: systemd.target.j2
+    dest: "/etc/systemd/system/rest-server.target"
+
+- name: Ensure service started
+  systemd:
+    state: started
+    daemon_reload: yes
+    name: 'rest-server.target'
