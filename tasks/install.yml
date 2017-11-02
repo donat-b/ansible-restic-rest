@@ -17,13 +17,22 @@
   register: get_url_restic
 
 - name: Decompress the binary
-  shell: "gzip -dc {{ get_url_restic.dest }} > {{ restic_install_path }}/{{ restic_rest_binary }}"
+  shell: "gzip -dc {{ get_url_restic.dest }} > {{ restic_install_path }}/{{ restic_rest_binary }}-{{ restic_rest_v }}"
   args:
-    creates: '{{ restic_install_path }}/{{ restic_rest_binary }}'
+    creates: '{{ restic_install_path }}/{{ restic_rest_binary }}-{{ restic_rest_v }}'
 
 - name: Ensure binary permissions are correct
   file:
+    path: '{{ restic_install_path }}/{{ restic_rest_binary }}-{{ restic_rest_v }}'
+    mode: '0755'
+    owner: 'root'
+    group: 'root'
+
+- name: Create symlink
+  file:
     path: '{{ restic_install_path }}/{{ restic_rest_binary }}'
+    src: '{{ restic_install_path }}/{{ restic_rest_binary }}-{{ restic_rest_v }}'
+    state: 'link'
     mode: '0755'
     owner: 'root'
     group: 'root'
