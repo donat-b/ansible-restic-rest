@@ -1,0 +1,23 @@
+---
+
+galaxy_info:
+  author: Donat Kh
+  description: Rest Server is a high performance HTTP server that implements restic's REST backend API
+  license: BSD
+  min_ansible_version: 2.4
+  platforms:
+    - name: Debian
+      versions:
+        - jessie
+        - stretch
+    - name: Ubuntu
+      versions:
+        - trusty
+        - wily
+        - xenial
+        - yakkety
+        - zesty
+  galaxy_tags:
+    - system
+    - backup
+    - restic
