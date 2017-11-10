@@ -23,6 +23,8 @@ restic_rest_repos:
     listen: ':8000'
   - path: '/user/home/backup_something_else'
     listen: ':8001'
+    # custom arguments
+    args: '--append-only --prometheus'
 ```
 
 

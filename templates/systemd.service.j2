@@ -4,7 +4,7 @@ After=syslog.target network.target
 StopWhenUnneeded=yes
 
 [Service]
-ExecStart=/usr/local/bin/rest-server --path "{{ item.path }}" --listen "{{ item.listen }}"
+ExecStart=/usr/local/bin/rest-server --path "{{ item.path }}" --listen "{{ item.listen }}" {{ item.args | default('') }}
 Restart=on-failure
 StandardOutput=journal
 StandardError=journal

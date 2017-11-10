@@ -15,6 +15,7 @@
         listen: ':8000'
       - path: '/tmp/backup_1'
         listen: ':8001'
+        args: '--append-only --prometheus'
       - path: '/tmp/backup_2'
         listen: ':8002'
 
