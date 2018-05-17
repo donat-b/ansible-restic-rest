@@ -4,6 +4,8 @@ After=syslog.target network.target
 StopWhenUnneeded=yes
 
 [Service]
+User={{ item.user | default(restic_rest_user) }}
+Group={{ item.group | default(restic_rest_user) }}
 ExecStart=/usr/local/bin/rest-server --path "{{ item.path }}" --listen "{{ item.listen }}" {{ item.args | default('') }}
 Restart=on-failure
 StandardOutput=journal
