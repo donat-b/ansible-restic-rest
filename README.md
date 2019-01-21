@@ -17,7 +17,7 @@ Role Variables
 --------------
 
 ```yaml
-restic_rest_v: '0.9.4'
+restic_rest_v: '0.9.7'
 restic_rest_repos:
   - path: '/user/home/backup'
     listen: ':8000'
