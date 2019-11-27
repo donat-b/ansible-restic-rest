@@ -15,6 +15,7 @@
     url: '{{ restic_rest_url }}'
     dest: '/tmp/'
   register: get_url_restic
+  changed_when: false
 
 - name: Decompress the binary
   shell: "gzip -dc {{ get_url_restic.dest }} > {{ restic_install_path }}/{{ restic_rest_binary }}-{{ restic_rest_v }}"
