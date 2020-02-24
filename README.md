@@ -26,6 +26,7 @@ restic_rest_repos:
     # custom arguments
     args: '--append-only --prometheus'
 restic_rest_target: 'rest-server.target default.target'
+restic_rest_target_enable: true
 ```
 
 

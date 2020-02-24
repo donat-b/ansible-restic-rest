@@ -7,3 +7,4 @@ restic_rest_v: '0.9.7'
 restic_rest_url: 'https://github.com/restic/rest-server/releases/download/v{{ restic_rest_v }}/rest-server-{{ restic_rest_v }}-{{ _platform_suffix }}.gz'
 restic_install_path: '/usr/local/bin'
 restic_rest_target: 'rest-server.target'
+restic_rest_target_enable: false

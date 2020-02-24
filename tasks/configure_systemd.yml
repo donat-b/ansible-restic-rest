@@ -7,6 +7,14 @@
   with_items: '{{ restic_rest_repos }}'
   notify: rest-server restart
 
+- name: Enable service units
+  systemd:
+    enabled: yes
+    daemon_reload: yes
+    name: "rest-server-{{ item.path | hash('sha1') | truncate(6, True, '') }}.service"
+  with_items: '{{ restic_rest_repos }}'
+  when: restic_rest_target_enable
+
 - name: Deploy systemd target
   template:
     src: systemd.target.j2
