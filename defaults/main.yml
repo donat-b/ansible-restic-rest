@@ -3,8 +3,9 @@
 restic_rest_user: 'root'
 restic_rest_group: 'root'
 restic_rest_binary: 'rest-server'
-restic_rest_v: '0.9.7'
-restic_rest_url: 'https://github.com/restic/rest-server/releases/download/v{{ restic_rest_v }}/rest-server-{{ restic_rest_v }}-{{ _platform_suffix }}.gz'
+restic_rest_v: '0.10.0'
+restic_rest_url: 'https://github.com/restic/rest-server/releases/download/v{{ restic_rest_v }}/rest-server_{{ restic_rest_v }}_{{ _platform_suffix }}.tar.gz'
+restic_download_dir: "rest-server_{{ restic_rest_v }}_{{ _platform_suffix }}"
 restic_install_path: '/usr/local/bin'
 restic_rest_target: 'rest-server.target'
 restic_rest_target_enable: false
