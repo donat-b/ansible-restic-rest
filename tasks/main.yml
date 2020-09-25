@@ -4,6 +4,10 @@
   include_tasks: install.yml
   tags: install
 
+- name: create user and password for http auth
+  include_tasks: htpasswd.yml
+  tags: password
+
 - name: Configure systemd services
   include_tasks: configure_systemd.yml
   tags: systemd
