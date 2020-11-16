@@ -21,10 +21,12 @@ restic_rest_v: '0.9.7'
 restic_rest_repos:
   - path: '/user/home/backup'
     listen: ':8000'
+    restic_htaccess_user: admin
+    restic_htaccess_password: Chang3Me
   - path: '/user/home/backup_something_else'
     listen: ':8001'
     # custom arguments
-    args: '--append-only --prometheus'
+    args: '--no-auth --append-only --prometheus'
 restic_rest_target: 'rest-server.target default.target'
 restic_rest_target_enable: true
 ```
