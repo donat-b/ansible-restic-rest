@@ -8,15 +8,10 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
-        - jessie
-        - stretch
+        - all
     - name: Ubuntu
       versions:
-        - trusty
-        - wily
-        - xenial
-        - yakkety
-        - zesty
+        - all
   galaxy_tags:
     - system
     - backup
