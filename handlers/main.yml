@@ -2,6 +2,7 @@
 # vi: ft=ansible :
 
 - name: rest-server restart
+  become: true
   systemd:
     name: 'rest-server.target'
     state: 'restarted'

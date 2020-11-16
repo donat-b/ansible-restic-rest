@@ -1,41 +1,38 @@
 ---
-
 - name: set internal variable platform-suffix
   set_fact:
-    _platform_suffix: 'linux-amd64'
+    _platform_suffix: 'linux_amd64'
   when: ansible_userspace_bits == '64'
 
 - name: set internal variable platform-suffix
   set_fact:
-    _platform_suffix: 'linux-386'
+    _platform_suffix: 'linux_386'
   when: ansible_userspace_bits == '32'
 
-- name: Download client binary
-  get_url:
-    url: '{{ restic_rest_url }}'
-    dest: '/tmp/'
-  register: get_url_restic
-  changed_when: false
-
 - name: Decompress the binary
-  shell: "gzip -dc {{ get_url_restic.dest }} > {{ restic_install_path }}/{{ restic_rest_binary }}-{{ restic_rest_v }}"
-  args:
-    creates: '{{ restic_install_path }}/{{ restic_rest_binary }}-{{ restic_rest_v }}'
+  unarchive:
+    src: '{{ restic_rest_url }}'
+    dest: "{{ restic_install_path }}"
+    remote_src: yes
+    creates: '{{ restic_install_path }}/{{ restic_download_dir }}/{{ restic_rest_binary }}'
+  become: true
 
 - name: Ensure binary permissions are correct
   file:
-    path: '{{ restic_install_path }}/{{ restic_rest_binary }}-{{ restic_rest_v }}'
+    path: '{{ restic_install_path }}/{{ restic_download_dir }}/{{ restic_rest_binary }}'
     mode: '0755'
     owner: 'root'
     group: 'root'
   when: not ansible_check_mode
+  become: true
 
 - name: Create symlink
   file:
     path: '{{ restic_install_path }}/{{ restic_rest_binary }}'
-    src: '{{ restic_install_path }}/{{ restic_rest_binary }}-{{ restic_rest_v }}'
+    src: '{{ restic_install_path }}/{{ restic_download_dir }}/{{ restic_rest_binary }}'
     state: 'link'
     mode: '0755'
     owner: 'root'
     group: 'root'
   when: not ansible_check_mode
+  become: true
