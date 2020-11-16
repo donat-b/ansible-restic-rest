@@ -2,6 +2,7 @@
 Description=Restic REST Server ({{ item.path }})
 After=syslog.target network.target
 StopWhenUnneeded=yes
+RequiresMountsFor={{ item.path }}
 
 [Service]
 User={{ item.user | default(restic_rest_user) }}
