@@ -9,3 +9,4 @@ restic_download_dir: "rest-server_{{ restic_rest_v }}_{{ _platform_suffix }}"
 restic_install_path: '/usr/local/bin'
 restic_rest_target: 'rest-server.target'
 restic_rest_target_enable: false
+restic_rest_htpasswd_crypt_scheme: 'ldap_sha1'
