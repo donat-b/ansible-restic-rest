@@ -11,8 +11,8 @@
 
 - name: Enable service units
   systemd:
-    enabled: yes
-    daemon_reload: yes
+    enabled: true
+    daemon_reload: true
     name: "rest-server-{{ item.path | hash('sha1') | truncate(6, True, '') }}.service"
   with_items: '{{ restic_rest_repos }}'
   when: restic_rest_target_enable
@@ -28,6 +28,6 @@
 - name: Ensure service started
   systemd:
     state: started
-    daemon_reload: yes
+    daemon_reload: true
     name: 'rest-server.target'
   become: true

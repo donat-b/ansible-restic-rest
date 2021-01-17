@@ -13,7 +13,7 @@
   unarchive:
     src: '{{ restic_rest_url }}'
     dest: "{{ restic_install_path }}"
-    remote_src: yes
+    remote_src: true
     creates: '{{ restic_install_path }}/{{ restic_download_dir }}/{{ restic_rest_binary }}'
   become: true
 
