@@ -10,3 +10,4 @@ restic_install_path: '/usr/local/bin'
 restic_rest_target: 'rest-server.target'
 restic_rest_target_enable: false
 restic_rest_htpasswd_crypt_scheme: 'ldap_sha1'
+restic_rest_no_log: true
