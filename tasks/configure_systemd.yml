@@ -6,6 +6,8 @@
     dest: "/etc/systemd/system/rest-server-{{ item.path | hash('sha1') | truncate(6, True, '') }}.service"
     mode: 0644
   with_items: '{{ restic_rest_repos }}'
+  loop_control:
+    label: "{{ item.path }}"
   notify: rest-server restart
   become: true
 
@@ -15,6 +17,8 @@
     daemon_reload: true
     name: "rest-server-{{ item.path | hash('sha1') | truncate(6, True, '') }}.service"
   with_items: '{{ restic_rest_repos }}'
+  loop_control:
+    label: "{{ item.path }}"
   when: restic_rest_target_enable
   become: true
 

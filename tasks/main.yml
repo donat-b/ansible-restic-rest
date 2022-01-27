@@ -7,6 +7,8 @@
 - name: create user and password for http auth
   include_tasks: htpasswd.yml
   with_items: '{{ restic_rest_repos }}'
+  loop_control:
+    label: "{{ item.path }}"
   tags: password
 
 - name: Configure systemd services
