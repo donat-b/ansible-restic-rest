@@ -1,13 +1,4 @@
 ---
-- name: set internal variable platform-suffix
-  set_fact:
-    _platform_suffix: 'linux_amd64'
-  when: ansible_userspace_bits == '64'
-
-- name: set internal variable platform-suffix
-  set_fact:
-    _platform_suffix: 'linux_386'
-  when: ansible_userspace_bits == '32'
 
 - name: Decompress the binary
   unarchive:
