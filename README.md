@@ -17,7 +17,7 @@ None
 --------------
 
 ```yaml
-restic_rest_v: '0.10.0'
+restic_rest_v: '0.11.0'
 restic_rest_repos:
   - path: '/user/home/backup'
     listen: ':8000'
