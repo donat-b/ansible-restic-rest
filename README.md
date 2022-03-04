@@ -1,7 +1,7 @@
  Restic rest-server
 =========
 
-Deploy rest-server for restic.
+Deploy [rest-server for restic](https://github.com/restic/rest-server).
 The intended usage pattern is that rest-server instances are behind an edge proxy,
 which would handle authorization and SSL itself, if necessary.
 
