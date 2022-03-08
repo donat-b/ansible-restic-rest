@@ -1,5 +1,7 @@
- Restic rest-server
-=========
+Restic rest-server
+==================
+
+![Lint Code Base](https://github.com/donat-b/ansible-restic-rest/actions/workflows/superlinter.yml/badge.svg)
 
 Deploy rest-server for restic.
 The intended usage pattern is that rest-server instances are behind an edge proxy,
@@ -8,12 +10,12 @@ which would handle authorization and SSL itself, if necessary.
 
 All servers can be started via `systemctl start rest-server.target`
 
- Requirements
+Requirements
 ------------
 
 None
 
- Role Variables
+Role Variables
 --------------
 
 ```yaml
@@ -31,8 +33,7 @@ restic_rest_target: 'rest-server.target default.target'
 restic_rest_target_enable: true
 ```
 
-
- License
+License
 -------
 
 BSD [![License](https://raw.githubusercontent.com/donat-b/ansible-restic-rest/master/.github/license.svg?sanitize=true)](https://github.com/donat-b/ansible-restic-rest/blob/master/LICENSE)
