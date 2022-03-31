@@ -1,7 +1,7 @@
 ---
 
 - name: Deploy systemd service units
-  template:
+  ansible.builtin.template:
     src: systemd.service.j2
     dest: "/etc/systemd/system/rest-server-{{ item.path | hash('sha1') | truncate(6, True, '') }}.service"
     mode: 0644
@@ -12,7 +12,7 @@
   become: true
 
 - name: Enable service units
-  systemd:
+  ansible.builtin.systemd:
     enabled: true
     state: started
     daemon_reload: true
@@ -25,13 +25,13 @@
 
 - name: Deploy systemd target
   become: true
-  template:
+  ansible.builtin.template:
     src: systemd.target.j2
     dest: "/etc/systemd/system/rest-server.target"
     mode: 0644
 
 - name: Ensure service started
-  systemd:
+  ansible.builtin.systemd:
     state: started
     daemon_reload: true
     name: 'rest-server.target'
