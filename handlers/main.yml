@@ -3,6 +3,6 @@
 
 - name: rest-server restart
   become: true
-  systemd:
+  ansible.builtin.systemd:
     name: 'rest-server.target'
     state: 'restarted'
